@@ -1,4 +1,6 @@
-﻿namespace Hockey.Data
+﻿using Utils;
+
+namespace Hockey.Data
 {
     public class HockeyPlayer
     {
@@ -21,9 +23,9 @@
                 return _birthPlace;
             }
 
-            set
+            private set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (Utilities.IsNullEmptyOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Birth place cannot be null or empty.");
                 }
@@ -32,6 +34,47 @@
                 _birthPlace = value;
             }
         }
+
+        public string FirstName
+        {
+            get
+            {
+                return _firstName;
+            }
+
+            private set
+            {
+                if (Utilities.IsNullEmptyOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("First name cannot be left blank");
+                }
+
+                // if we get here, then no execption happened
+                _firstName = value;
+            }
+        }
+
+
+        public string LastName
+        {
+            get
+            {
+                return _lastName;
+            }
+
+            private set
+            {
+                if (Utilities.IsNullEmptyOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Birth place cannot be null or empty.");
+                }
+
+                // if we get here, then no execption happened
+                _lastName = value;
+            }
+        }
+
+
 
         //TODO: complete the remaining string property
 
@@ -42,14 +85,32 @@
                 return _heightInInches;
             }
 
-            set
+            private set
             {
-                if(value <= 0)
+                if(Utilities.IsZeroOrNegative(value))
                 {
                     throw new ArgumentException("Height must be positive.");
                 }
 
                 _heightInInches = value;
+            }
+        }
+
+        public int WeightInPounds
+        {
+            get
+            {
+                return _weightInPounds;
+            }
+
+            private set
+            {
+                if (!Utilities.IsPositive(value))
+                {
+                    throw new ArgumentException("Height must be positive.");
+                }
+
+                _weightInPounds = value;
             }
         }
 
@@ -62,11 +123,9 @@
                 return _dateOfBirth;
             }
 
-            set
+            private set
             {
-                if( // TODO: implement a validty check for dates in the future
-                    // Check the documentation for DateOnly 
-                    )
+                if (Utilities.IsInFuture(value))
                 {
                     throw new ArgumentException("Date of birth cannot be in the future.");
                 }
@@ -78,33 +137,45 @@
         // Auto=implemented property
 
         public Position Position { get; set; }
+        public Shot Shot { get; set; }
 
 
         /// <summary>
         /// Creates a default instance of a HockeyPlayer
         /// </summary>
-        public HockeyPlayer()
-        {
-            _firstName = string.Empty;
-            _lastName = string.Empty;
-            _birthPlace = string.Empty;
-            _dateOfBirth = new DateOnly();
-            _weightInPounds = 0;
-            _heightInInches = 0;
-            Shot = Shot.Left;
-            Position = Position.Goalie;
+       
+ //       public HockeyPlayer()
+  //      {
+  //          _firstName = string.Empty;
+   //         _lastName = string.Empty;
+   //         _birthPlace = string.Empty;
+   //         _dateOfBirth = new DateOnly();
+   //         _weightInPounds = 0;
+   //         _heightInInches = 0;
+   //         Shot = Shot.Left;
+   //         Position = Position.Goalie;
 
-        }
+  //      }
 
 
         public HockeyPlayer(string firstName, string lastName, string birthPlace, DateOnly dateOfBirth,
             int weightInPounds, int heightInInches, Position position, Shot shot)
         {
+            FirstName = firstName; 
+            LastName = lastName;
             BirthPlace = birthPlace;
-            // finish
+            DateOfBirth = dateOfBirth;
+            WeightInPounds = weightInPounds;
+            HeightInInches = heightInInches;
+            Position = position;
+            Shot = shot;
+
         }
 
-        // constructors
-
+     public override string ToString()
+        {
+            return$"{FirstName} {LastName}, {BirthPlace}, {DateOfBirth}, {WeightInPounds}, {HeightInInches}, {Position}, {Shot}";
+        }
+        
     }
 }
