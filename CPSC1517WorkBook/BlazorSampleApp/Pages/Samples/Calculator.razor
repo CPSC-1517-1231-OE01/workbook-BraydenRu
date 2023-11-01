@@ -1,0 +1,75 @@
+﻿@page "/calculator"
+
+<h3>Calculator</h3>
+
+<fieldset>
+    <div class="mb-3">
+        <label class="form-label" for="num1">Num1</label>
+        <input class="form-control"type="text" id="num1" @bind-value="num1"/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="num2">Num2</label>
+        <input class="form-control" type="text" id="num2" @bind-value="num2"/>
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-primary" @onclick="Add"> Num1 + Num2</button>
+        <button class ="btn btn-danger" @onclick="Subtract"> Num1 - Num2</button>
+        <button class="btn btn-warning"@onclick="Multiply"> Num1 * Num2</button>
+        <button class="btn btn-success"@onclick="Divide"> Num1 / Num2</button>
+    </div>
+</fieldset>
+
+@if (!string.IsNullOrWhiteSpace(output))
+{
+    <div class="mb-3 fw-bold">
+        Calculation Output
+    </div>
+    
+    <div class="alert @(IsError ? "alert-danger" : "alert-info")">
+        @output
+    </div>
+}
+
+
+@code {
+    private bool IsError { get; set; } = false;
+    private string output { get; set; } = "";
+    private int num1 { get; set; }
+    private int num2 { get; set; } 
+
+    private void Add()
+    {
+        IsError = false;
+        output = $"The sum is: {num1 + num2}";
+    }
+
+    private void Subtract()
+    {
+        IsError = false;
+        output = $"The difference is: {num1 - num2}";
+    }
+
+    private void Divide()
+
+    {
+        if (num2 != 0)
+        {
+            IsError = false;
+            output = $"The quotient is: {((double)num1 / num2):F2}";
+        }
+        else
+        {
+            IsError = true;
+            output = "Num2 cannot be zero";
+        }
+    }
+
+    private void Multiply()
+    {
+        IsError = false;
+        output = $"The product is: {num1 * num2}";
+    }
+
+}

@@ -1,0 +1,62 @@
+﻿@page "/random-number"
+
+<h3>MaxRandomNumnber</h3>
+
+ <p>This page will render a random number between 1 and a max value.</p>
+ @if (!string.IsNullOrWhiteSpace(feedbackMessage))
+{
+     <div class="alert @(IsError ? "alert-danger" : "alert-info")">
+         @feedbackMessage
+     </div>
+}
+
+   
+<fieldset>
+    <div class="mb-3">
+        <label class="form-label" for="maxNumber">Max Number Value</label>
+        <input class="form-control" type="text" id="maxNumber" @bind-value="maxNumber"/>
+    </div>
+
+    <div class="d-grid gap-2">
+        <div>
+            <button class="btn btn-outline-primary" @onclick="GenerateRandomNumber">Generate Number</button>
+        </div>
+        <div>
+            <button class="btn btn-outline-secondary" @onclick="ClearOutputs">Clear Output</button>
+        </div>
+    </div>
+</fieldset>
+
+
+
+@code {
+    private int maxNumber { get; set; } = 0;
+    private int randomNumber;
+    private bool IsError { get; set; } = false;
+    private string? feedbackMessage;
+
+    private void GenerateRandomNumber()
+    {
+        if(maxNumber > 0)
+        {
+            IsError = false;
+            randomNumber = Random.Shared.Next(1, maxNumber);
+            feedbackMessage = $"Your random number is {randomNumber}";
+        }
+        else 
+        {
+            IsError = true;
+            feedbackMessage = "Please enter a max number value greater than 0";
+        }
+        
+    }
+
+    private void ClearOutputs()
+    {
+        randomNumber = 0;
+        feedbackMessage = "";
+    }
+
+}
+
+

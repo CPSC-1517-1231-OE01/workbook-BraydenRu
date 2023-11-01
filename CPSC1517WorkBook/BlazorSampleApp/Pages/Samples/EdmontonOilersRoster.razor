@@ -1,0 +1,59 @@
+﻿@page "/edmonton-oilers-roster"
+@using Hockey.Data
+
+<h3>Edmonton Oilers Roster</h3>
+
+@if (FeedbackMessage != null)
+{
+    <div class="alert alert-danger">
+        @FeedbackMessage
+    </div>
+}
+
+    
+
+
+@code {
+    private string? FeedbackMessage { get; set; }
+    private List<HockeyPlayer> Players{ get; set; } = new List<HockeyPlayer>();
+
+    [Inject]
+    public IWebHostEnvironment WebHostEnvironment { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        string csvFilePath = $@"{WebHostEnvironment.ContentRootPath}\Data\players.csv";
+
+        using (StreamReader reader = new StreamReader(csvFilePath))
+        {
+            // skip the header
+            reader.ReadLine();
+
+            // Read in one line at a time until we reach the end of the file
+            string? currentLine;
+
+            while ((currentLine = reader.ReadLine()) != null)
+            {
+                try
+                {
+                    HockeyPlayer? currentPlayer = null;
+                    if ((currentPlayer = HockeyPlayer.Parse(currentLine)) != null)
+                    {
+                        Players.Add(currentPlayer);
+                    }
+                }
+                catch(Exception e)
+                {
+                    FeedbackMessage = e.Message;
+                }
+
+                // not necessary in a using block
+                reader.Close();
+            }
+
+            
+            base.OnInitialized();
+        }
+    }
+
+}

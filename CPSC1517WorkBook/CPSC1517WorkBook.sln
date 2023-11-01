@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HockeyTestProject", "HockeyTestProject\HockeyTestProject.csproj", "{AAA7B251-F7D3-4019-A7C0-B9740F082A67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilitiesTestProject", "UtilitiesTestProject\UtilitiesTestProject.csproj", "{35601402-E700-450E-83BA-0CB7A4F961BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilitiesTestProject", "UtilitiesTestProject\UtilitiesTestProject.csproj", "{35601402-E700-450E-83BA-0CB7A4F961BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSampleApp", "BlazorSampleApp\BlazorSampleApp.csproj", "{6E9BC808-DE7C-400C-9546-9EFB271CD3C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{35601402-E700-450E-83BA-0CB7A4F961BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35601402-E700-450E-83BA-0CB7A4F961BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35601402-E700-450E-83BA-0CB7A4F961BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E9BC808-DE7C-400C-9546-9EFB271CD3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E9BC808-DE7C-400C-9546-9EFB271CD3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E9BC808-DE7C-400C-9546-9EFB271CD3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E9BC808-DE7C-400C-9546-9EFB271CD3C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
